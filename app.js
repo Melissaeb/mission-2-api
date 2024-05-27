@@ -1,9 +1,24 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const carValueRoutes = require("./routes/carValueRoutes");
+// require("dotenv").config()
 
-// Middleware to parse JSON
+// const whitelist = [process.env.CLIENT_HOST];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
+
+// Middleware
 app.use(express.json());
+// app.use(cors(corsOptions));
+app.use(cors());
 
 app.use("/api", carValueRoutes);
 
