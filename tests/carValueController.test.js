@@ -1,11 +1,10 @@
 const request = require("supertest");
-const express = require("express");
-const expressApp = require("./api-1.js");
+const expressApp = require("../app");
 
-describe("POST /car-value", () => {
+describe("POST /api/car-value", () => {
   it("gives correct response for valid inputs", async () => {
     const response = await request(expressApp)
-      .post("/car-value")
+      .post("/api/car-value")
       .send({ model: "Corolla", year: 2015 });
 
     expect(response.status).toBe(200);
@@ -21,7 +20,7 @@ describe("POST /car-value", () => {
   test2Cases.forEach(({ model, year, expectedValue }) => {
     it(`is case-insensitive for model inputs (${model})`, async () => {
       const response = await request(expressApp)
-        .post("/car-value")
+        .post("/api/car-value")
         .send({ model, year });
 
       expect(response.status).toBe(200);
@@ -38,7 +37,7 @@ describe("POST /car-value", () => {
   test3Cases.forEach(({ model, year, expectedValue }) => {
     it(`gives correct response when model input included spaces, numbers and/or other symbols (${model})`, async () => {
       const response = await request(expressApp)
-        .post("/car-value")
+        .post("/api/car-value")
         .send({ model, year });
 
       expect(response.status).toBe(200);
@@ -48,7 +47,7 @@ describe("POST /car-value", () => {
 
   it("gives correct response when model input only includes numbers", async () => {
     const response = await request(expressApp)
-      .post("/car-value")
+      .post("/api/car-value")
       .send({ model: "216", year: 2023 });
 
     expect(response.status).toBe(200);
@@ -63,7 +62,7 @@ describe("POST /car-value", () => {
   test5Cases.forEach(({ model, year, expectedValue }) => {
     it(`gives correct response when year is just inside accepted range (${year})`, async () => {
       const response = await request(expressApp)
-        .post("/car-value")
+        .post("/api/car-value")
         .send({ model, year });
 
       expect(response.status).toBe(200);
@@ -81,7 +80,7 @@ describe("POST /car-value", () => {
   test6Cases.forEach(({ model, year }) => {
     it(`gives error response when year is outside accepted range (1885 - current year) (test: ${year})`, async () => {
       const response = await request(expressApp)
-        .post("/car-value")
+        .post("/api/car-value")
         .send({ model, year });
 
       expect(response.status).toBe(400);
@@ -93,7 +92,7 @@ describe("POST /car-value", () => {
 
   it("gives error response when model does not include letters or numbers (@*()$)", async () => {
     const response = await request(expressApp)
-      .post("/car-value")
+      .post("/api/car-value")
       .send({ model: "@*()$", year: 2023 });
 
     expect(response.status).toBe(400);
@@ -111,7 +110,7 @@ describe("POST /car-value", () => {
   test8Cases.forEach(({ model, year }) => {
     it(`gives error response when one or more values are missing`, async () => {
       const response = await request(expressApp)
-        .post("/car-value")
+        .post("/api/car-value")
         .send({ model, year });
 
       expect(response.status).toBe(400);
@@ -123,7 +122,7 @@ describe("POST /car-value", () => {
 
   it("gives error response when year is not written with digits", async () => {
     const response = await request(expressApp)
-      .post("/car-value")
+      .post("/api/car-value")
       .send({ model: "Corolla", year: "twenty twenty" });
 
     expect(response.status).toBe(400);
