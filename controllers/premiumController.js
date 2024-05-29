@@ -7,14 +7,24 @@ exports.calculatePremium = (req, res) => {
   const maxRiskRating = 5;
 
   // Error handling:
-  if (
-    !Number.isInteger(carValue) ||
-    !Number.isInteger(riskRating) ||
-    carValue < minCarValue ||
-    riskRating < minRiskRating ||
-    riskRating > maxRiskRating
-  ) {
-    return res.status(400).json({ error: "there is an error" });
+  switch (true) {
+    case carValue === "" || riskRating === "":
+      res.status(400).json({ error: "One or more values are missing" });
+      break;
+    case !Number.isInteger(carValue) || !Number.isInteger(riskRating):
+      res.status(400).json({
+        error:
+          "Car value and/or risk rating not recognised. Please use valid numbers",
+      });
+      break;
+    case carValue < minCarValue ||
+      riskRating < minRiskRating ||
+      riskRating > maxRiskRating:
+      res.status(400).json({
+        error:
+          "Car value or risk rating is outside of the accepted range. Please input a car value at or above 1885, and a risk rating between 1 and 5",
+      });
+      break;
   }
 
   // Output for correct inputs:

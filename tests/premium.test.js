@@ -71,7 +71,10 @@ describe("POST /api/premium", () => {
         .send({ carValue, riskRating });
 
       expect(response.status).toBe(400);
-      expect(response.body).toEqual({ error: "there is an error" });
+      expect(response.body).toEqual({
+        error:
+          "Car value or risk rating is outside of the accepted range. Please input a car value at or above 1885, and a risk rating between 1 and 5",
+      });
     });
   });
 
@@ -87,7 +90,10 @@ describe("POST /api/premium", () => {
         .send({ carValue, riskRating });
 
       expect(response.status).toBe(400);
-      expect(response.body).toEqual({ error: "there is an error" });
+      expect(response.body).toEqual({
+        error:
+          "Car value and/or risk rating not recognised. Please use valid numbers",
+      });
     });
   });
 
@@ -103,7 +109,9 @@ describe("POST /api/premium", () => {
         .send({ carValue, riskRating });
 
       expect(response.status).toBe(400);
-      expect(response.body).toEqual({ error: "there is an error" });
+      expect(response.body).toEqual({
+        error: "One or more values are missing",
+      });
     });
   });
 });
