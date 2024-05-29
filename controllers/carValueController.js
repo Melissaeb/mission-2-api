@@ -11,7 +11,7 @@ exports.calculateCarValue = (req, res) => {
     case model === "" || year === "":
       res.status(400).json({ error: "One or more values are missing" });
       break;
-    case typeof year !== "number":
+    case !Number.isInteger(year):
       res.status(400).json({
         error: "Year not recognised. Please use a valid year written in digits",
       });

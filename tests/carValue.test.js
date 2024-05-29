@@ -95,14 +95,21 @@ describe("POST /api/car-value", () => {
     });
   });
 
-  it("Test 8: gives error response when year is not written with digits", async () => {
-    const response = await request(expressApp)
-      .post("/api/car-value")
-      .send({ model: "Corolla", year: "twenty twenty" });
+  const test8Cases = [
+    { model: "Corolla", year: "twenty twenty" },
+    { model: "Corolla", year: "2018.5" },
+  ];
 
-    expect(response.status).toBe(400);
-    expect(response.body).toEqual({
-      error: "Year not recognised. Please use a valid year written in digits",
+  test8Cases.forEach(({ model, year }) => {
+    it(`Test 8: gives error response when year is not an integer(test: ${year})`, async () => {
+      const response = await request(expressApp)
+        .post("/api/car-value")
+        .send({ model, year });
+
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({
+        error: "Year not recognised. Please use a valid year written in digits",
+      });
     });
   });
 });
