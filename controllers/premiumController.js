@@ -8,8 +8,8 @@ exports.calculatePremium = (req, res) => {
 
   // Error handling:
   if (
-    typeof carValue !== "number" ||
-    typeof riskRating !== "number" ||
+    !Number.isInteger(carValue) ||
+    !Number.isInteger(riskRating) ||
     carValue < minCarValue ||
     riskRating < minRiskRating ||
     riskRating > maxRiskRating
