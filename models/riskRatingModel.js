@@ -4,7 +4,7 @@ exports.getRiskRating = (claimHistory) => {
     let riskRating = 0;
 
     if (typeof claimHistory !== 'string' || claimHistory.trim() === '') {
-        throw new Error("Invalid input");
+        throw new Error("Invalid input: claim history is required and must be a non-empty string.");
     }
 
     const claimInput = claimHistory.toLowerCase().split(/\W+/);

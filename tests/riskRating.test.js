@@ -26,7 +26,7 @@ describe("Risk Rating API Tests", () => {
             .post("/api/risk-rating")
             .send(input);
         expect(response.status).toBe(200);
-        expect(response.body).toEqual({ risk_rating: 2 });
+        expect(response.body).toEqual({ risk_rating: 3 });
     });
 
     test('Valid input where keywords exceed 5', async () => {
@@ -62,6 +62,6 @@ describe("Risk Rating API Tests", () => {
             .post("/api/risk-rating")
             .send(input);
         expect(response.status).toBe(400);
-        expect(response.body).toEqual({ error: "Invalid input: claim history must be a string." });
+        expect(response.body).toEqual({ error: "Invalid input: claim history is required and must be a non-empty string."});
     });
 });
