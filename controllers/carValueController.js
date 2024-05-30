@@ -3,7 +3,7 @@ const carValueModel = require("../models/carValueModel");
 exports.calculateCarValue = (req, res) => {
   const { model, year } = req.body;
   const currentYear = new Date().getFullYear();
-  const earliestYear = 1885;
+  const earliestYear = 1886;
   const regex = /^\W+$/;
 
   // Error handling:

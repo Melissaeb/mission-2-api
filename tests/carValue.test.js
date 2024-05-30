@@ -3,6 +3,7 @@ const expressApp = require("../app");
 
 describe("POST /api/car-value", () => {
   const currentYear = new Date().getFullYear();
+  const earliestYear = 1886;
 
   it("Test 1: gives correct response for valid inputs", async () => {
     const response = await request(expressApp)
@@ -32,7 +33,7 @@ describe("POST /api/car-value", () => {
   });
 
   const test4Cases = [
-    { model: "Accord", year: 1885, expectedValue: 6285 },
+    { model: "Accord", year: earliestYear, expectedValue: 6286 },
     { model: "Accord", year: currentYear, expectedValue: 6424 },
   ];
 
@@ -48,7 +49,7 @@ describe("POST /api/car-value", () => {
   });
 
   const test5Cases = [
-    { model: "Corolla", year: 1884 },
+    { model: "Corolla", year: earliestYear - 1 },
     { model: "Corolla", year: currentYear + 1 },
     { model: "Corolla", year: -2015 },
   ];
