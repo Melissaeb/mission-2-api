@@ -1,6 +1,6 @@
 
 
-function getRiskRating(input) {
+/**function getRiskRating(input) {
 
     const keywords = ["collide", "crash", "scratch", "bump", "smash"];
 
@@ -51,4 +51,4 @@ function getRiskRating(input) {
     return { risk_rating: riskRating}
 }
 
-module.exports = { getRiskRating };
+module.exports = { getRiskRating };**/
