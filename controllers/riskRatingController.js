@@ -6,6 +6,6 @@ exports.getRiskRating = (req, res) => {
         const riskRating = riskRatingModel.getRiskRating(req.body.claimHistory);
         res.json({ risk_rating: riskRating });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: "Invalid input: claim history is required and must be a non-empty string." });
     }
 };
