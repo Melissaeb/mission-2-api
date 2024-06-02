@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watchAll --coverage",
+    "test": "jest",
+    "test:watch": "jest --watchAll --coverage",
     "dev": "nodemon server.js"
   },
   "keywords": [],
